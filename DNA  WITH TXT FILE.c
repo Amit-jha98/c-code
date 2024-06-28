@@ -17,7 +17,7 @@ void strrev(char *str) {
         str[i] = str[j];
         str[j] = temp;
     }
-}
+
 
 void createFolder(const char* folderPath) {
     #ifdef _WIN32
