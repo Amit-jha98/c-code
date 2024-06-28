@@ -1,44 +1,41 @@
 #include <stdio.h>
 #include <math.h>
 
-// Function to calculate the reduced mass
-double calculate_reduced_mass(double m1, double m2) {
-    return (m1 * m2) / (m1 + m2);
-}
+int main()
+{
+    double m1, m2, vf, k, mu;
+    double speed_of_light = 3.00e+8;
 
-// Function to calculate the force constant
-double calculate_force_constant(double mu, double vibrational_frequency) {
-    return mu * pow(vibrational_frequency, 2) * pow(2 * M_PI, 2);
-}
-
-// Function to calculate the vibrational frequency
-double calculate_vibrational_frequency(double mu, double force_constant) {
-    return (1 / (2 * M_PI)) * sqrt(force_constant / mu);
-}
-
-int main() {
-    // Input
-    double m1, m2, vibrational_frequency;
-
-    printf("Enter the mass of atom 1 (in amu): ");
+    printf("Enter the mass of atom 1 (in kg): ");
     scanf("%lf", &m1);
 
-    printf("Enter the mass of atom 2 (in amu): ");
+    printf("Enter the mass of atom 2 (in kg): ");
     scanf("%lf", &m2);
 
-    printf("Enter the vibrational frequency (in cm^-1): ");
-    scanf("%lf", &vibrational_frequency);
+    printf("Enter the vibrational frequency (in Hz) or enter 0 (if you want to find): ");
+    scanf("%lf", &vf);
 
-    // Calculations
-    double reduced_mass = calculate_reduced_mass(m1, m2);
-    double force_constant = calculate_force_constant(reduced_mass, vibrational_frequency);
-    double vibrational_frequency_calculated = calculate_vibrational_frequency(reduced_mass, force_constant);
+    printf("Enter the value of Force Constant (K) (in N/m) or enter 0 (if you want to find): ");
+    scanf("%lf", &k);
 
-    // Display Results
-    printf("\nResults:\n");
-    printf("Reduced Mass (μ): %.4lf amu\n", reduced_mass);
-    printf("Force Constant (k): %.4lf dyn/cm\n", force_constant);
-    printf("Vibrational Frequency (v): %.4lf cm^-1\n", vibrational_frequency_calculated);
+    mu = (m1 * m2) / (m1 + m2);
+
+    if (k == 0 && vf == 0) {
+        printf("\nResults:\n");
+        printf("Enter valid Value\n");
+    } else if (k == 0) {
+        k = mu * pow(vf, 2) * pow(2 * M_PI, 2);
+        printf("\nResults:\n");
+        printf("Reduced Mass (μ): %.4e kg\n", mu);
+        printf("Force Constant (k): %.4e N/m\n", k);
+        printf("Vibrational Frequency (v): %.4e Hz\n", vf);
+    } else {
+        vf = (1.0 / (2 * M_PI)) * sqrt(k / mu);
+        printf("\nResults:\n");
+        printf("\nReduced Mass (μ): %.4e kg\n", mu);
+        printf("Force Constant (k): %.4e N/m\n", k);
+        printf("Vibrational Frequency (v): %.4e Hz\n", vf);
+    }
 
     return 0;
 }
