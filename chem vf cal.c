@@ -2,6 +2,7 @@
 #include <math.h>
 
 int main()
+
 {
     double m1, m2, vf, k, mu;
     double speed_of_light = 3.00e+8;
