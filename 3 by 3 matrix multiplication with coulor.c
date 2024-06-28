@@ -2,7 +2,7 @@
 #define ANSI_COLOR_YELLOW "\x1b[33m"
 int main()
 {
-int ar1[3] [3], ar2[3][3],ar3[3][3],i,j,k,t;
+int ar1[3] [3], ar2[3][3],ar3[3][3],i,j,k;
 printf(ANSI_COLOR_YELLOW "\nEnter the element of 1st matrix:-\n");
 for(i=0;i<3;i++)
 {
