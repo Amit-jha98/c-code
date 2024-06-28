@@ -28,7 +28,7 @@ void createFolder(const char* folderPath) {
 }
 
 void saveOutputToFile(char* seq1, char* seq2, char* aligned_seq1, char* alignment_symbols, char* aligned_seq2, int alignment_score, int match_score, int mismatch_score, int gap_penalty, const char* filePath) {
-    FILE* file = fopen(filePath, "a");  // Open file in append mode
+    FILE* file = fopen(filePath, "a");  
     if (file == NULL) {
         printf("Error opening file for writing.\n");
         return;
@@ -76,9 +76,9 @@ void needleman_wunsch(char* seq1, char* seq2, int len1, int len2, int match_scor
     }
     i = len1;
     j = len2;
-    char aligned_seq1[MAX_SEQ_LENGTH * 2] = "";  // Updated size to handle longer sequences
-    char aligned_seq2[MAX_SEQ_LENGTH * 2] = "";  // Updated size to handle longer sequences
-    char alignment_symbols[MAX_SEQ_LENGTH * 2] = "";  // Updated size to handle longer sequences
+    char aligned_seq1[MAX_SEQ_LENGTH * 2] = "";  
+    char aligned_seq2[MAX_SEQ_LENGTH * 2] = "";  
+    char alignment_symbols[MAX_SEQ_LENGTH * 2] = "";  
     while (i > 0 || j > 0) {
         if (i > 0 && dp[i][j] == dp[i - 1][j] + gap_penalty) {
             strncat(aligned_seq1, &seq1[i - 1], 1);
@@ -106,7 +106,7 @@ void needleman_wunsch(char* seq1, char* seq2, int len1, int len2, int match_scor
     printf("Aligned Sequence 1: %s\n", aligned_seq1);
     printf("Alignment Symbols:  %s\n", alignment_symbols);
     printf("Aligned Sequence 2: %s\n", aligned_seq2);
-   printf("Alignment Score: ");
+    printf("Alignment Score: ");
     if (dp[len1][len2] > 0) {
         printf(GREEN_COLOR "%d" RESET_COLOR "\n", dp[len1][len2]);
     } else {
@@ -114,7 +114,6 @@ void needleman_wunsch(char* seq1, char* seq2, int len1, int len2, int match_scor
     }
     printf("Score Calculation: match = %d, mismatch = %d, gap penalty = %d\n", match_score, mismatch_score, gap_penalty);
 
-    // Save output to a text file in the specified folder with the given file name
     char filePath[MAX_SEQ_LENGTH + 100];
     sprintf(filePath, "%s/%s.txt", folderPath, fileName);
     saveOutputToFile(seq1, seq2, aligned_seq1, alignment_symbols, aligned_seq2, dp[len1][len2], match_score, mismatch_score, gap_penalty, filePath);
@@ -145,7 +144,7 @@ int main() {
 
         int len1 = strlen(seq1);
         int len2 = strlen(seq2);
-if (choice == 'n' || choice == 'N') {
+        if (choice == 'n' || choice == 'N') {
             printf("Enter folder path for saving output: ");
             scanf("%s", folderPath);
             printf("Enter the name of the file to save: ");
